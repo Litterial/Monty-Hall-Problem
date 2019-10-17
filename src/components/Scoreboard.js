@@ -9,7 +9,7 @@ class Scoreboard extends Component {
 
         this.state={
             games:0,
-            wins:0,
+            wins:0, /
             losses:0,
             win_percentage:0,
         };
@@ -37,14 +37,13 @@ class Scoreboard extends Component {
     render(){
 
         return(
-            <div>
+            <div className="Scoreboard">
                 Scoreboard
                 <h1>Total Games: {this.state.games}</h1>
                 <h1>Wins: {this.state.wins}</h1>
                 <h1>Loses: {this.state.losses}</h1>
                 <h1>Win Percentage: {this.state.win_percentage}%</h1>
-                <Gameboard victory={this.victory} defeat={this.defeat}/>
-                <button onClick={this.reset}> Reset</button>
+                <Gameboard victory={this.victory} defeat={this.defeat} resetScore={this.reset}/>
             </div>
         )
 
