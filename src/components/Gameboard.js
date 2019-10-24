@@ -11,6 +11,9 @@ class Gameboard extends Component {
             clicked: "",
             titleMessage: "",
             wrongDoor: "",
+            choices:false,
+            playAgain:false,
+
         };
         this.chooseDoor = this.chooseDoor.bind(this);
         this.selectWrongDoor = this.selectWrongDoor.bind(this);
@@ -22,14 +25,36 @@ class Gameboard extends Component {
         this.setState({myDoor: id, clicked: id, titleMessage: "You have selected Door " + id});
     };
 
+    anotherRound =(e)=>
+    {
+        this.setState({myDoor: "", clicked: "", doorWinner: Math.floor(Math.random() * 3) + 1,wrongDoor:"",choices:false,playAgain:false});
+    };
+
     resetDoors = (e) => {
-        this.setState({myDoor: "", clicked: "", doorWinner: Math.floor(Math.random() * 3) + 1,wrongDoor:""});
+        this.anotherRound();
         this.props.resetScore();
     };
 
     selectWrongDoor = (e) => {
         var message = setTimeout(() => this.setState({titleMessage: "Let's select Door " + e, wrongDoor: e}), 3000);
+        setTimeout(()=>this.setState({choices:true}),6000);
         console.log("selectWrongDoor event fired")
+    };
+
+
+
+    reveal =(e)=> {
+        console.log(e.target.id);
+        if (e.target.id == this.state.doorWinner) {
+            this.props.victory();
+            this.setState({titleMessage: "You win",choices:false,playAgain:true});
+        }
+        else{
+            this.props.defeat();
+            this.setState({titleMessage: "You Lose",choices:false,playAgain:true});
+
+        }
+
     };
 
     // componentWillUnmount() {
@@ -37,12 +62,28 @@ class Gameboard extends Component {
     // }
 
     render() {
-        const doors = [];
+        var keep;
+        var swap;
+        var play_again;
+
+
+        var doors = [1,2,3];
         var randomDoor;
-        for (var x = 1; x < 4; x++)
-            doors.push(x);
 
         console.log(doors);
+        if (this.state.choices)
+        {
+            keep=<button id={this.state.myDoor} onClick={this.reveal} >Keep</button>;
+            doors.splice(doors.indexOf(parseInt(this.state.myDoor)),1);
+            console.log(doors);
+
+            doors.splice(doors.indexOf(parseInt(this.state.wrongDoor)),1);
+            console.log(doors);
+
+            swap=<button id={doors[0]} onClick={this.reveal}>Swap</button>;
+        }
+        if (this.state.playAgain)
+            play_again=<button onClick={this.anotherRound}>Play again?</button>;
 
         if (this.state.myDoor && !this.state.wrongDoor) {
             console.log("A door was clicked");
@@ -53,9 +94,8 @@ class Gameboard extends Component {
                 console.log(randomDoor);
             }
             while (this.state.doorWinner == randomDoor || this.state.myDoor == randomDoor);
-            doors.splice(randomDoor);
             console.log("My door "+ this.state.myDoor);
-            console.log(randomDoor);
+            console.log(doors);
             this.selectWrongDoor(randomDoor);
             // }
 
@@ -79,9 +119,8 @@ class Gameboard extends Component {
                         <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
                         <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
                         <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
+
                     </div>
-                    <button onClick={this.props.victory}>Win</button>
-                    <button onClick={this.props.defeat}>Lose</button>
                     <button onClick={this.resetDoors}>Reset</button>
                 </div>
             )
@@ -94,13 +133,14 @@ class Gameboard extends Component {
                     <h1>{this.state.titleMessage}</h1>
                     <h1>{this.state.doorWinner}</h1>
                     <div className="doorGrid">
-                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
-                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
-                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
+                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
+                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
+                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
                     </div>
-                    <button onClick={this.props.victory}>Win</button>
-                    <button onClick={this.props.defeat}>Lose</button>
                     <button onClick={this.resetDoors}>Reset</button>
+                    {keep}
+                    {swap}
+                    {play_again}
                 </div>
 
             )
@@ -115,8 +155,6 @@ class Gameboard extends Component {
                         <Door number={2} chooseDoor={this.chooseDoor} clicked={this.state.clicked}/>
                         <Door number={3} chooseDoor={this.chooseDoor} clicked={this.state.clicked}/>
                     </div>
-                    <button onClick={this.props.victory}>Win</button>
-                    <button onClick={this.props.defeat}>Lose</button>
                     <button onClick={this.resetDoors}>Reset</button>
                 </div>
             );
