@@ -150,6 +150,7 @@ class Gameboard extends Component {
                 <div className="GameBoard">
                     Gameboard
                     <h1>{this.state.doorWinner}</h1>
+                    <h1>Select a door</h1>
                     <div className="doorGrid">
                         <Door number={1} chooseDoor={this.chooseDoor} clicked={this.state.clicked}/>
                         <Door number={2} chooseDoor={this.chooseDoor} clicked={this.state.clicked}/>
