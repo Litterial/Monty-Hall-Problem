@@ -1,6 +1,5 @@
 import React,{Component} from 'react'
 import "../App.css"
-import {CSSTransition} from "react-transition-group";
 
 class Door extends Component{
     constructor(props) {
@@ -23,12 +22,11 @@ class Door extends Component{
 
     goat=(e)=>
     {
-        setTimeout(()=>this.setState({goat:"This is a goat"}),15000);
+        setTimeout(()=>this.setState({goat:"This is a goat"}),2000);
     };
     render() {
 
-            var goat=
-                <div  key ={this.props.number} className="curtainContainer" id={this.props.number}>
+            var goat=<div  className="curtainContainer" id={this.props.number}>
                         <div  className="Door">{this.props.number}</div>
                         <div className="curtain curtain-float curtain-raise">L</div>
                         <div className="curtain curtain-float curtain-raise">R</div>

@@ -36,8 +36,8 @@ class Gameboard extends Component {
     };
 
     selectWrongDoor = (e) => {
-        var message = this.setState({titleMessage: "Let's select Door " + e, wrongDoor: e});
-        this.setState({choices:true});
+        var message = setTimeout(() => this.setState({titleMessage: "Let's select Door " + e, wrongDoor: e}), 3000);
+        setTimeout(()=>this.setState({choices:true}),6000);
         console.log("selectWrongDoor event fired")
     };
 

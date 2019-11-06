@@ -56,7 +56,7 @@
   background: yellow;
   position:relative;
   z-index: 2;
-  transition: all 5s ease-out;
+  transition: height 2s ease-out;
 
 }
 
@@ -66,12 +66,12 @@
   float: left;
 }
 
-.curtain-raise
-{
+/*.curtain-raise*/
+/*{*/
 
-  transform:translateY(-50%);
+/*  transform:translateY(-50%);*/
 
-}
+/*}*/
 
 .curtainContainer
 {
@@ -79,3 +79,20 @@
   width: 100%;
   overflow: hidden;
 }
+
+
+
+/*.test-enter {*/
+/*  opacity: 0;*/
+/*}*/
+/*.test-enter-active {*/
+/*  opacity: 1;*/
+/*  transition: opacity 2000ms;*/
+/*}*/
+/*.test-exit {*/
+/*  opacity: 1;*/
+/*}*/
+/*.test-exit-active {*/
+/*  opacity: 0;*/
+/*  transition: opacity 2000ms;*/
+/*}*/
