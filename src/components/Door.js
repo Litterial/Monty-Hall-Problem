@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import "../App.css"
+import {CSSTransition} from "react-transition-group";
 
 class Door extends Component{
     constructor(props) {
@@ -14,21 +15,29 @@ class Door extends Component{
 
     clicked=(e)=>
     {
-        this.props.chooseDoor(e.target.id);
+
+        this.props.chooseDoor(this.props.number);
+
 
     };
 
     goat=(e)=>
     {
-        setTimeout(()=>this.setState({goat:"This is a goat"}),2000);
+        setTimeout(()=>this.setState({goat:"This is a goat"}),15000);
     };
     render() {
 
             var goat=
-                <div className="Door">{this.props.number}</div>;
+                <div  key ={this.props.number} className="curtainContainer" id={this.props.number}>
+                        <div  className="Door">{this.props.number}</div>
+                        <div className="curtain curtain-float curtain-raise">L</div>
+                        <div className="curtain curtain-float curtain-raise">R</div>
+                </div>;
             if(this.state.goat)
                 goat = this.state.goat;
-        if(this.props.clicked==this.props.number)
+
+
+            if(this.props.clicked==this.props.number)
         {
             return(
             <div id={this.props.number}>I was clicked</div>);
@@ -44,6 +53,7 @@ class Door extends Component{
             }
             return(
                 <div>
+                    goat
                     {goat}
                 </div>
             )
@@ -52,8 +62,10 @@ class Door extends Component{
         else if (this.props.myDoor)
         {
             return(
-                <div id={this.props.number} className="Door">
-                  {this.props.number}
+                <div  className="curtainContainer" id={this.props.number}>
+                    <div className="Door">{this.props.number}</div>
+                    <div className="curtain curtain-float">L</div>
+                    <div className="curtain curtain-float">R</div>
                 </div>);
         }
 
@@ -61,8 +73,10 @@ class Door extends Component{
 
         {
             return(
-                <div  onClick={this.clicked} id={this.props.number} className="Door">
-                    {this.props.number}
+                <div  className="curtainContainer" onClick={this.clicked} id={this.props.number}>
+                    <div  className="Door">{this.props.number}</div>
+                    <div className="curtain curtain-float">L</div>
+                    <div className="curtain curtain-float">R</div>
                 </div>);
         }
 

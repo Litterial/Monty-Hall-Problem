@@ -31,14 +31,51 @@
 {
   background: purple;
 }
-
+/*Will be renamed as prize*/
 .Door
 {
+  /*display: inline-block;*/
+  width:100%;
   background: brown;
+  position:absolute;
+  z-index: 1;
 }
 .doorGrid
 {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
+  grid-template-columns: repeat(3,auto);
   grid-column-gap: 20px;
+}
+
+
+.curtain
+{
+
+  height:100%;
+  width:50%;
+  background: yellow;
+  position:relative;
+  z-index: 2;
+  transition: all 5s ease-out;
+
+}
+
+.curtain-float
+{
+  /*transform:translateY(100%);*/
+  float: left;
+}
+
+.curtain-raise
+{
+
+  transform:translateY(-50%);
+
+}
+
+.curtainContainer
+{
+  position: relative;
+  width: 100%;
+  overflow: hidden;
 }
