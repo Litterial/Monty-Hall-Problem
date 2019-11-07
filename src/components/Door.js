@@ -4,12 +4,6 @@ import "../App.css"
 class Door extends Component{
     constructor(props) {
         super(props);
-        this.state={
-            goat:""
-        };
-
-        this.goat=this.goat.bind(this);
-
     }
 
     clicked=(e)=>
@@ -22,17 +16,17 @@ class Door extends Component{
 
     goat=(e)=>
     {
-        setTimeout(()=>this.setState({goat:"This is a goat"}),2000);
+        this.props.goatFunction();
     };
     render() {
 
             var goat=<div  className="curtainContainer" id={this.props.number}>
                         <div  className="Door">{this.props.number}</div>
-                        <div className="curtain curtain-float curtain-raise">L</div>
+                        <div className="curtain curtain-float curtain-raise">Lraise</div>
                         <div className="curtain curtain-float curtain-raise">R</div>
                 </div>;
-            if(this.state.goat)
-                goat = this.state.goat;
+            if(this.props.goat)
+                goat = this.props.goat;
 
 
             if(this.props.clicked==this.props.number)
@@ -45,13 +39,13 @@ class Door extends Component{
         else if (this.props.number==this.props.wrongDoor)
         {
 
-            if(!this.state.goat)
+            if(!this.props.goat)
             {
                 this.goat();
             }
             return(
                 <div>
-                    goat
+                    Hello
                     {goat}
                 </div>
             )
@@ -62,7 +56,7 @@ class Door extends Component{
             return(
                 <div  className="curtainContainer" id={this.props.number}>
                     <div className="Door">{this.props.number}</div>
-                    <div className="curtain curtain-float">L</div>
+                    <div className="curtain curtain-float">Le</div>
                     <div className="curtain curtain-float">R</div>
                 </div>);
         }

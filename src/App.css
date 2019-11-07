@@ -56,7 +56,7 @@
   background: yellow;
   position:relative;
   z-index: 2;
-  transition: height 2s ease-out;
+  /*transition: background-color 1s;*/
 
 }
 
@@ -66,12 +66,14 @@
   float: left;
 }
 
-/*.curtain-raise*/
-/*{*/
+.curtain-raise
+{
 
-/*  transform:translateY(-50%);*/
-
-/*}*/
+  /*transform:translateY(-100%);*/
+animation-fill-mode: forwards;
+animation-name: raise;
+animation-duration:1s;
+}
 
 .curtainContainer
 {
@@ -81,6 +83,10 @@
 }
 
 
+@keyframes raise {
+  from {transform: translateY(0)}
+  to {transform: translateY(-100%); background-color: blue;}
+}
 
 /*.test-enter {*/
 /*  opacity: 0;*/

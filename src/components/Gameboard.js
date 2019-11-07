@@ -13,8 +13,12 @@ class Gameboard extends Component {
             wrongDoor: "",
             choices:false,
             playAgain:false,
+            goat:"",
+
+
 
         };
+        this.goat=this.goat.bind(this);
         this.chooseDoor = this.chooseDoor.bind(this);
         this.selectWrongDoor = this.selectWrongDoor.bind(this);
     }
@@ -36,11 +40,14 @@ class Gameboard extends Component {
     };
 
     selectWrongDoor = (e) => {
-        var message = setTimeout(() => this.setState({titleMessage: "Let's select Door " + e, wrongDoor: e}), 3000);
-        setTimeout(()=>this.setState({choices:true}),6000);
+        var message = setTimeout(() => this.setState({titleMessage: "Let's select Door " + e, wrongDoor: e}), 2000);
+        setTimeout(()=>this.setState({choices:true}),5000);
         console.log("selectWrongDoor event fired")
     };
-
+    goat=(e)=>
+    {
+        setTimeout(()=>this.setState({goat:"This is a goat"}),2000);
+    };
 
 
     reveal =(e)=> {
@@ -116,9 +123,9 @@ class Gameboard extends Component {
                     <h1>{this.state.titleMessage}</h1>
                     <h1>{this.state.doorWinner}</h1>
                     <div className="doorGrid">
-                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
-                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
-                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked}/>
+                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked} goat={this.state.goat} goatFunction={this.goat}/>
+                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked} goat={this.state.goat} goatFunction={this.goat}/>
+                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked} goat={this.state.goat} goatFunction={this.goat}/>
 
                     </div>
                     <button onClick={this.resetDoors}>Reset</button>
@@ -133,9 +140,9 @@ class Gameboard extends Component {
                     <h1>{this.state.titleMessage}</h1>
                     <h1>{this.state.doorWinner}</h1>
                     <div className="doorGrid">
-                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
-                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
-                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} />
+                        <Door number={1} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} goatFunction={this.goat}/>
+                        <Door number={2} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} goatFunction={this.goat}/>
+                        <Door number={3} myDoor={this.state.myDoor} clicked={this.state.clicked} wrongDoor={this.state.wrongDoor} goatFunction={this.goat}/>
                     </div>
                     <button onClick={this.resetDoors}>Reset</button>
                     {keep}
